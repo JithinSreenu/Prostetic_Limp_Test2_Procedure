@@ -181,3 +181,22 @@ void GPDMA1_Channel0_IRQHandler(void)
 }
 /* USER CODE END 1 */
 ```
+
+
+
+
+
+Step 2: Update Your Active Workspace Code FilesTo complete this manual integration upgrade on your computer:
+Open your real main.c file and apply the modifications detailed in Phase 2 of the markdown guide above.
+
+Open your real stm32u5xx_it.c file and insert the GPDMA1 Interrupt Handler shown in Phase 3 into your user slots.
+
+Save all your workspace tracks and press Ctrl + B to run a fresh build.
+
+
+Why Using static is Mandatory Here (Crucial Tip)Take a look at line 98 in the guide code: 
+static char tx_buffer[64];.
+When using standard polling mode, a local variable like char tx_buffer[64]; 
+works fine because the code stalls until transmission completes. However, with DMA, the function triggers the transfer and instantly leaves the block. 
+If you don't use the static keyword, the memory location on the stack will immediately clean itself up and overwrite with trash data while the DMA hardware is still actively reading from it! 
+Making it static locks its memory position safely in place.
