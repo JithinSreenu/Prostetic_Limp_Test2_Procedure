@@ -189,3 +189,6 @@ void ADC_Sensor_Task(void *pvParameters)
 }
 /* USER CODE END 4 */
 ```
+Step 2: Sync and Build Your FirmwareOpen your physical project files (main.c) and copy the structural code segments from the markdown file user sections above into their designated spots.
+Press Ctrl + B to compile the complete firmware layout manually.The firmware will build into a unified execution block. 
+The ADC processing layer runs dynamically on an independent execution timeline, completely isolated from your asynchronous LED blink loops and UART telemetry tasks.
